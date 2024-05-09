@@ -1,0 +1,54 @@
+/*-------------------------------------------------------------------
+[Table of contents]
+1. CMB METABOXES CUSTOM STYLING
+-------------------------------------------------------------------*/
+/*1. CMB METABOXES CUSTOM STYLING*/
+form-field.storyfi_post_metabox-wrap th{
+    padding-left: 15px;
+    color: #fff;
+}
+.form-field.storyfi_post_metabox-wrap {
+    background: #f02222;
+    padding: 15px;
+}
+.form-wrap .storyfi_post_metabox-wrap label{
+    color: #fff;
+    font-weight: bold;
+}
+#storyfi_metaboxs .storyfi_title td{
+    padding-left: 20px;
+    padding-bottom: 25px;
+}
+#storyfi_metaboxs .storyfi_title {
+    background: #f02222 none repeat scroll 0 0;
+    padding: 20px;
+}
+#storyfi_metaboxs .storyfi_title h1{
+    color: #ffffff;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+}
+#storyfi_metaboxs .storyfi_title p {
+    color: #ffffff;
+    padding: 0;
+}
+#storyfi_metaboxs .storyfi_subtitle h1 {
+    font-size: 18px;
+    background: #d7d4d4;
+    padding: 20px;
+}
+#storyfi_metaboxs .storyfi_subtitle{
+    padding-top: 0px;
+}
+.cmb2-id-storyfi-icon ul li img {
+    width: 80px;
+}
+.cmb2-id-storyfi-icon ul li {
+    width: 25%;
+    float: inline-start;
+}
+.cmb2-id-storyfi-icon ul {
+    display: inline-block;
+    width: 100%;
+}
