@@ -750,11 +750,7 @@ function yourprefix_options_page_message_callback( $cmb, $args ) {
 		if ( $args['is_updated'] ) {
 
 			// Modify the updated message.
-			$args['message'] = sprintf( 
-			    // translators: %s is a placeholder for the metabox title.
-			    esc_html__( '%s &mdash; Updated!', 'storyfi' ), 
-			    $cmb->prop( 'title' ) 
-			);
+			$args['message'] = sprintf( esc_html__( '%s &mdash; Updated!', 'cmb2' ), $cmb->prop( 'title' ) );
 		}
 
 		add_settings_error( $args['setting'], $args['code'], $args['message'], $args['type'] );

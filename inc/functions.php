@@ -1,61 +1,62 @@
 <?php
+if( !function_exists('storyfi_carousel_shortcode') ) {
+  function storyfi_carousel_shortcode($atts) {
 
-function storyfi_carousel_shortcode($atts) {
+      $query_args = array(
+          'post_type' => 'storyfi',
+          'id '       => $atts['post_id'],
+          'name'      => $atts['post_name']
+      );
+      $query = new WP_Query($query_args);
+      ob_start(); 
 
-    // Query the custom post type
-    $query_args = array(
-        'post_type' => 'storyfi',
-        'id '       => $atts['post_id'],
-        'name'      => $atts['post_name']
-    );
-    $query = new WP_Query($query_args);
+      $storyfi_carousel_group = get_post_meta($atts['post_id'], 'storyfi_carousel_group', true); ?>
 
-    $storyfi_carousel_group = get_post_meta($atts['post_id'], 'storyfi_carousel_group', true); ?>
-
-    <div class="story-bubbles">
-      <div class="bubbles" data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false }'> <?php
-        foreach (array_reverse($storyfi_carousel_group) as $storyfi_carousel_item) {
-          if(!empty($storyfi_carousel_item['storyfi_carousel_title'])) {
-            $storyfi_carousel_title = $storyfi_carousel_item['storyfi_carousel_title'];
-          } else {
-            $storyfi_carousel_title = esc_html__('Item','storyfi');
+      <div class="story-bubbles">
+        <div class="bubbles" data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false }'> <?php
+          foreach (array_reverse($storyfi_carousel_group) as $storyfi_carousel_item) {
+            if(!empty($storyfi_carousel_item['storyfi_carousel_title'])) {
+              $storyfi_carousel_title = $storyfi_carousel_item['storyfi_carousel_title'];
+            } else {
+              $storyfi_carousel_title = esc_html__('Item','storyfi');
+            } ?>
+            <div class="bubble carousel-cell">
+              <a href="#storyfi-modal">
+                <div class="thumb">
+                  <img src="<?php echo esc_url($storyfi_carousel_item['storyfi_carousel_img']); ?>" alt="">
+                </div>
+                <div class="text">
+                    <span><?php echo esc_html($storyfi_carousel_title); ?></span>
+                </div>
+              </a>
+            </div><?php
           } ?>
-          <div class="bubble carousel-cell">
-            <a href="#storyfi-modal">
-              <div class="thumb">
-                <img src="<?php echo esc_url($storyfi_carousel_item['storyfi_carousel_img']); ?>" alt="">
-              </div>
-              <div class="text">
-                  <span><?php echo esc_html($storyfi_carousel_title); ?></span>
-              </div>
-            </a>
-          </div><?php
-        } ?>
+        </div>
+        <div class="bubbles readon"></div>
       </div>
-      <div class="bubbles readon"></div>
-    </div>
-    
-    <div id="storyfi-modal">
-      <span class="close">&times;</span>
-      <div class="story-container carousel-main">
-        <?php
-        foreach (array_reverse($storyfi_carousel_group) as $storyfi_carousel_item) { ?>
-          <div class="story-item">
-            <div class="indicator">
-              <div class="slider-progress">
-                <span class="progress"></span>
+      
+      <div id="storyfi-modal">
+        <span class="close">&times;</span>
+        <div class="story-container carousel-main">
+          <?php
+          foreach (array_reverse($storyfi_carousel_group) as $storyfi_carousel_item) { ?>
+            <div class="story-item">
+              <div class="indicator">
+                <div class="slider-progress">
+                  <span class="progress"></span>
+                </div>
               </div>
+              <img src="<?php echo esc_url($storyfi_carousel_item['storyfi_carousel_img']); ?>">
             </div>
-            <img src="<?php echo esc_url($storyfi_carousel_item['storyfi_carousel_img']); ?>">
-          </div>
-        <?php } ?>
+          <?php } ?>
+        </div>
       </div>
-    </div>
-    <?php
-    // Restore original post data
-    wp_reset_postdata();
+      <?php
+      // Restore original post data
+      return ob_get_clean();
+  }
+  add_shortcode('storyfi_shortcode', 'storyfi_carousel_shortcode');
 }
-add_shortcode('storyfi_shortcode', 'storyfi_carousel_shortcode');
 
 
 add_action('transition_post_status', 'storify_post_meta_on_publish', 10, 3);
